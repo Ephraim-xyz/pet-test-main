@@ -1,13 +1,26 @@
 {
   "pages": [
+    "pages/welcome/welcome",
+    "pages/questionnaire/questionnaire", 
+    "pages/breed-input/breed-input",
+    "pages/results/results",
     "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "Pet MBTI性格测试",
     "navigationBarBackgroundColor": "#ffffff"
   },
   "componentFramework": "glass-easel",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "usingComponents": {
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-progress": "tdesign-miniprogram/progress/progress",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-tag": "tdesign-miniprogram/tag/tag",
+    "t-divider": "tdesign-miniprogram/divider/divider",
+    "t-grid": "tdesign-miniprogram/grid/grid",
+    "t-grid-item": "tdesign-miniprogram/grid-item/grid-item"
+  }
 }

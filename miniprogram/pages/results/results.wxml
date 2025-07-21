@@ -1,0 +1,153 @@
+<view class="results-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-header">
+    <view class="nav-content">
+      <view class="nav-left">
+        <view class="back-button" bind:tap="goBack">
+          <text class="iconfont">‹</text>
+        </view>
+      </view>
+      <view class="nav-title">性格报告</view>
+      <view class="nav-right">
+        <view class="share-button" bind:tap="shareResults">
+          <text class="share-icon">⤴</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="content-scroll" show-scrollbar="{{false}}">
+    <!-- 性格类型卡片 -->
+    <view class="result-card personality-card">
+      <view class="personality-content">
+        <view class="dog-avatar">{{personalityType.emoji}}</view>
+        <view class="personality-title">{{personalityType.name}}</view>
+        <view class="personality-subtitle">{{personalityType.subtitle}}</view>
+        <t-tag theme="primary" class="personality-tag">
+          你的狗狗性格类型
+        </t-tag>
+      </view>
+    </view>
+
+    <!-- 维度分析卡片 -->
+    <view class="result-card dimensions-card">
+      <view class="card-header">
+        <view class="card-title">🧠 性格维度分析</view>
+      </view>
+      
+      <view class="dimensions-content">
+        <view 
+          class="dimension-item" 
+          wx:for="{{dimensions}}" 
+          wx:key="category"
+        >
+          <view class="dimension-header">
+            <text class="dimension-left">{{item.leftLabel}}</text>
+            <text class="dimension-right">{{item.rightLabel}}</text>
+          </view>
+          <view class="dimension-bar-container">
+            <view class="dimension-bar">
+              <view 
+                class="dimension-fill" 
+                style="width: {{item.percentage}}%; background: {{item.color}};"
+              ></view>
+              <view class="dimension-percentage">{{item.percentage}}%</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 性格特征卡片 -->
+    <view class="result-card traits-card">
+      <view class="card-header">
+        <view class="card-title">🎯 性格特征</view>
+      </view>
+      
+      <view class="traits-content">
+        <view class="trait-description">
+          {{personalityType.description}}
+        </view>
+        <view class="trait-highlight">
+          <view class="highlight-title">核心特点</view>
+          <view class="trait-tags">
+            <t-tag 
+              wx:for="{{personalityType.traits}}" 
+              wx:key="*this"
+              theme="light"
+              class="trait-tag"
+            >
+              {{item}}
+            </t-tag>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 互动建议卡片 -->
+    <view class="result-card suggestions-card">
+      <view class="card-header">
+        <view class="card-title">💡 互动建议</view>
+      </view>
+      
+      <view class="suggestions-content">
+        <view 
+          class="suggestion-item" 
+          wx:for="{{suggestions}}" 
+          wx:key="type"
+        >
+          <view class="suggestion-icon">{{item.icon}}</view>
+          <view class="suggestion-content">
+            <view class="suggestion-title">{{item.title}}</view>
+            <view class="suggestion-desc">{{item.description}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 品种匹配卡片 (如果有品种输入) -->
+    <view class="result-card breed-card" wx:if="{{breedInfo.name}}">
+      <view class="card-header">
+        <view class="card-title">🐕‍🦺 品种分析</view>
+      </view>
+      
+      <view class="breed-content">
+        <view class="breed-match">
+          <view class="breed-emoji">{{breedInfo.emoji}}</view>
+          <view class="breed-info">
+            <view class="breed-name">{{breedInfo.name}}</view>
+            <t-tag theme="success" class="match-tag">
+              {{breedInfo.matchLevel}}
+            </t-tag>
+          </view>
+        </view>
+        <view class="breed-description">
+          {{breedInfo.description}}
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部间距 -->
+    <view class="bottom-spacing"></view>
+  </scroll-view>
+
+  <!-- 底部操作按钮 -->
+  <view class="bottom-actions">
+    <t-button 
+      theme="primary" 
+      size="large"
+      class="share-card-button"
+      bind:tap="generateShareCard"
+    >
+      📱 生成分享卡片
+    </t-button>
+    <t-button 
+      theme="light" 
+      size="large"
+      class="restart-button"
+      bind:tap="restartTest"
+    >
+      🔄 重新测试
+    </t-button>
+  </view>
+</view> 

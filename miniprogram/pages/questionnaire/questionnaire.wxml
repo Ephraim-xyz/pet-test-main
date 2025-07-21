@@ -1,0 +1,97 @@
+<view class="questionnaire-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-header">
+    <view class="nav-content">
+      <view class="nav-left">
+        <view class="back-button" bind:tap="goBack">
+          <text class="iconfont">‹</text>
+        </view>
+      </view>
+      <view class="nav-title">性格测试</view>
+      <view class="nav-right"></view>
+    </view>
+    
+    <!-- 进度条 -->
+    <view class="progress-section">
+      <view class="progress-info">
+        <text>题目 {{currentIndex + 1}}/{{totalQuestions}}</text>
+        <text>{{progressPercent}}%</text>
+      </view>
+      <t-progress 
+        percentage="{{progressPercent}}" 
+        theme="primary"
+        stroke-width="8rpx"
+      ></t-progress>
+    </view>
+  </view>
+
+  <!-- 问题区域 -->
+  <view class="question-area">
+    <!-- 问题卡片 -->
+    <view class="question-card">
+      <view class="question-content">
+        <view class="question-emoji">{{currentQuestion.emoji}}</view>
+        <view class="question-text">{{currentQuestion.text}}</view>
+        <view class="question-subtitle">请根据平时观察到的行为来评分</view>
+      </view>
+    </view>
+
+    <!-- Likert 评分组件 -->
+    <view class="rating-card">
+      <view class="rating-section">
+        <view class="rating-labels">
+          <text class="label-left">强烈不同意</text>
+          <text class="label-center">中立</text>
+          <text class="label-right">强烈同意</text>
+        </view>
+        
+        <view class="likert-scale">
+          <view 
+            wx:for="{{5}}" 
+            wx:key="index"
+            class="likert-point point-{{index + 1}} {{selectedAnswer === index + 1 ? 'active' : ''}}"
+            bind:tap="selectAnswer"
+            data-value="{{index + 1}}"
+          ></view>
+        </view>
+        
+        <view class="rating-en-labels">
+          <text>Disagree</text>
+          <text>Neutral</text>
+          <text>Agree</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 维度提示 -->
+    <view class="dimension-hint" wx:if="{{currentQuestion.dimension}}">
+      <view class="hint-dot"></view>
+      <view class="hint-content">
+        <view class="hint-title">测试维度：{{currentQuestion.dimension}}</view>
+        <view class="hint-desc">{{currentQuestion.dimensionDesc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-actions">
+    <t-button 
+      wx:if="{{currentIndex > 0}}"
+      theme="light" 
+      size="large"
+      class="prev-button"
+      bind:tap="prevQuestion"
+    >
+      上一题
+    </t-button>
+    <t-button 
+      theme="primary" 
+      size="large"
+      class="next-button"
+      bind:tap="nextQuestion"
+      disabled="{{!selectedAnswer}}"
+    >
+      {{currentIndex === totalQuestions - 1 ? '查看结果' : '下一题'}}
+    </t-button>
+  </view>
+</view> 

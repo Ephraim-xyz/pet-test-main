@@ -1,0 +1,101 @@
+<view class="breed-input-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-header">
+    <view class="nav-content">
+      <view class="nav-left">
+        <view class="back-button" bind:tap="goBack">
+          <text class="iconfont">‹</text>
+        </view>
+      </view>
+      <view class="nav-title">品种信息</view>
+      <view class="nav-right">
+        <text class="skip-btn" bind:tap="skipBreed">跳过</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 主内容区 -->
+  <view class="content-area">
+    <!-- 标题区域 -->
+    <view class="title-section">
+      <view class="emoji-icon">🐕‍🦺</view>
+      <view class="main-title">告诉我们你的狗狗品种</view>
+      <view class="description">
+        品种信息将帮助我们提供
+        <text class="description-sub">更准确的性格分析和个性化建议</text>
+      </view>
+    </view>
+
+    <!-- 输入卡片 -->
+    <view class="input-card">
+      <view class="input-section">
+        <view class="input-label">
+          狗狗品种 <text class="optional-text">(可选)</text>
+        </view>
+        <view class="input-wrapper">
+          <t-input
+            value="{{inputValue}}"
+            placeholder="例如：金毛、泰迪、哈士奇..."
+            bind:change="onInputChange"
+            bind:focus="onInputFocus"
+            bind:blur="onInputBlur"
+            class="breed-input"
+          />
+          <view class="search-icon">🔍</view>
+        </view>
+      </view>
+      
+      <view class="input-tip">
+        💡 不确定品种？没关系！我们会根据行为特征为您分析
+      </view>
+    </view>
+
+    <!-- 热门品种推荐 -->
+    <view class="breeds-section">
+      <view class="section-title">热门品种</view>
+      <t-grid column="{{2}}" class="breeds-grid">
+        <t-grid-item 
+          wx:for="{{displayBreeds}}" 
+          wx:key="name"
+          class="breed-item"
+          bind:tap="selectBreed"
+          data-breed="{{item.name}}"
+        >
+          <view class="breed-card {{selectedBreed === item.name ? 'selected' : ''}}">
+            <view class="breed-emoji">{{item.emoji}}</view>
+            <view class="breed-name">{{item.name}}</view>
+          </view>
+        </t-grid-item>
+      </t-grid>
+    </view>
+
+    <!-- 选中品种显示 -->
+    <view class="selected-section" wx:if="{{selectedBreed}}">
+      <view class="selected-content">
+        <view class="selected-dot"></view>
+        <view class="selected-text">已选择：{{selectedBreed}}</view>
+        <view class="clear-btn" bind:tap="clearSelection">✕</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部按钮 -->
+  <view class="bottom-section">
+    <t-button 
+      theme="primary" 
+      size="large" 
+      class="continue-button"
+      bind:tap="continueToResults"
+    >
+      📊 查看测试结果
+    </t-button>
+    <t-button 
+      theme="light" 
+      size="large"
+      class="skip-button"
+      bind:tap="skipBreed"
+    >
+      暂时跳过，直接查看结果
+    </t-button>
+  </view>
+</view> 
