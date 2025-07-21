@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐶 Pet MBTI 性格测试 - 原型展示</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://tdesign.tencent.com/miniprogram/dist/miniprogram.css">
+    <style>
+        /* iPhone 15 Pro 规格 (393x852px) */
+        .phone-frame {
+            width: 393px;
+            height: 852px;
+            border-radius: 47px;
+            background: #000;
+            padding: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 39px;
+            overflow: hidden;
+            background: #fff;
+        }
+        .page-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 39px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">
+            🐶 Pet MBTI 性格测试 - 原型展示
+        </h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+            <!-- 欢迎页 -->
+            <div class="text-center">
+                <h2 class="text-lg font-semibold mb-4 text-gray-700">欢迎页</h2>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="welcome.html" class="page-iframe"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 问卷页 -->
+            <div class="text-center">
+                <h2 class="text-lg font-semibold mb-4 text-gray-700">问卷页</h2>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="questionnaire.html" class="page-iframe"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 品种输入页 -->
+            <div class="text-center">
+                <h2 class="text-lg font-semibold mb-4 text-gray-700">品种输入页</h2>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="breed-input.html" class="page-iframe"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 结果页 -->
+            <div class="text-center">
+                <h2 class="text-lg font-semibold mb-4 text-gray-700">结果页</h2>
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <iframe src="results.html" class="page-iframe"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <p class="text-gray-600">所有页面采用iPhone 15 Pro尺寸 (393×852px) 展示</p>
+            <p class="text-gray-500 text-sm mt-2">使用TDesign设计风格 + Tailwind CSS</p>
+        </div>
+    </div>
+</body>
+</html>

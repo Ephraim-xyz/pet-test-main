@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结果页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .result-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .dimension-bar {
+            background: linear-gradient(90deg, #e5e7eb 0%, #e5e7eb 100%);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .dimension-fill {
+            transition: width 1s ease-in-out;
+            border-radius: 10px;
+        }
+        .dog-avatar {
+            font-size: 5rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .slide-in {
+            animation: slideIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- 顶部导航栏 -->
+    <div class="bg-white bg-opacity-90 backdrop-blur-md shadow-sm px-4 py-3">
+        <div class="flex items-center justify-between">
+            <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <h1 class="text-lg font-semibold text-gray-800">性格报告</h1>
+            <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="px-4 py-6 pb-24">
+        <!-- 性格类型卡片 -->
+        <div class="result-card rounded-3xl p-6 mb-6 shadow-xl slide-in">
+            <div class="text-center">
+                <div class="dog-avatar mb-4">🐕‍🦺</div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Guardian</h2>
+                <p class="text-lg text-gray-600 mb-4">守护粘人型</p>
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full inline-block">
+                    <span class="text-sm font-medium">你的狗狗性格类型</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 维度分析卡片 -->
+        <div class="result-card rounded-3xl p-6 mb-6 shadow-xl slide-in">
+            <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">性格维度分析</h3>
+            
+            <!-- 维度1 -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-blue-600">依赖性</span>
+                    <span class="text-sm font-medium text-gray-600">独立性</span>
+                </div>
+                <div class="dimension-bar h-4 relative">
+                    <div class="dimension-fill h-full bg-gradient-to-r from-blue-400 to-blue-600" style="width: 75%"></div>
+                    <div class="absolute right-2 top-0.5 text-xs text-white font-bold">75%</div>
+                </div>
+            </div>
+
+            <!-- 维度2 -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-green-600">谨慎性</span>
+                    <span class="text-sm font-medium text-gray-600">探索性</span>
+                </div>
+                <div class="dimension-bar h-4 relative">
+                    <div class="dimension-fill h-full bg-gradient-to-r from-green-400 to-green-600" style="width: 65%"></div>
+                    <div class="absolute right-2 top-0.5 text-xs text-white font-bold">65%</div>
+                </div>
+            </div>
+
+            <!-- 维度3 -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-purple-600">服从性</span>
+                    <span class="text-sm font-medium text-gray-600">自主性</span>
+                </div>
+                <div class="dimension-bar h-4 relative">
+                    <div class="dimension-fill h-full bg-gradient-to-r from-purple-400 to-purple-600" style="width: 80%"></div>
+                    <div class="absolute right-2 top-0.5 text-xs text-white font-bold">80%</div>
+                </div>
+            </div>
+
+            <!-- 维度4 -->
+            <div class="mb-4">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-indigo-600">沉稳性</span>
+                    <span class="text-sm font-medium text-gray-600">兴奋性</span>
+                </div>
+                <div class="dimension-bar h-4 relative">
+                    <div class="dimension-fill h-full bg-gradient-to-r from-indigo-400 to-indigo-600" style="width: 70%"></div>
+                    <div class="absolute right-2 top-0.5 text-xs text-white font-bold">70%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 性格解读卡片 -->
+        <div class="result-card rounded-3xl p-6 mb-6 shadow-xl slide-in">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="mr-2">🧠</span>性格特征
+            </h3>
+            <div class="space-y-3 text-gray-700">
+                <p class="leading-relaxed">
+                    你的狗狗是典型的"守护者"性格，具有强烈的依赖性和保护意识。它们喜欢时刻陪伴在主人身边，是家庭的忠诚守护者。
+                </p>
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-3 rounded">
+                    <p class="text-sm">
+                        <strong>核心特点：</strong>忠诚、粘人、警觉、温顺
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 互动建议卡片 -->
+        <div class="result-card rounded-3xl p-6 mb-6 shadow-xl slide-in">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="mr-2">💡</span>互动建议
+            </h3>
+            
+            <div class="space-y-4">
+                <!-- 玩具推荐 -->
+                <div class="bg-yellow-50 rounded-xl p-4">
+                    <h4 class="font-semibold text-gray-800 mb-2 flex items-center">
+                        <span class="mr-2">🎾</span>适合的玩具
+                    </h4>
+                    <p class="text-sm text-gray-700">互动性强的玩具，如拉绳、飞盘，增进与主人的感情纽带</p>
+                </div>
+
+                <!-- 活动推荐 -->
+                <div class="bg-green-50 rounded-xl p-4">
+                    <h4 class="font-semibold text-gray-800 mb-2 flex items-center">
+                        <span class="mr-2">🚶‍♂️</span>推荐活动
+                    </h4>
+                    <p class="text-sm text-gray-700">轻松的散步、在熟悉环境中的游戏，避免过于刺激的运动</p>
+                </div>
+
+                <!-- 训练建议 -->
+                <div class="bg-purple-50 rounded-xl p-4">
+                    <h4 class="font-semibold text-gray-800 mb-2 flex items-center">
+                        <span class="mr-2">🎓</span>训练要点
+                    </h4>
+                    <p class="text-sm text-gray-700">正面激励为主，建立安全感，逐步培养独立性</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 品种匹配（如果有输入品种） -->
+        <div class="result-card rounded-3xl p-6 mb-6 shadow-xl slide-in">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                <span class="mr-2">🐕‍🦺</span>品种分析
+            </h3>
+            <div class="bg-gray-50 rounded-xl p-4">
+                <div class="flex items-center space-x-3 mb-2">
+                    <span class="text-2xl">🦮</span>
+                    <span class="font-semibold text-gray-800">金毛寻回犬</span>
+                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">高度匹配</span>
+                </div>
+                <p class="text-sm text-gray-700">
+                    测试结果与金毛寻回犬的典型性格特征高度吻合，这个品种天生具有友善、忠诚的性格。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部操作按钮 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-4">
+        <div class="flex space-x-3">
+            <button class="flex-1 py-3 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all shadow-lg">
+                📱 生成分享卡片
+            </button>
+            <button class="flex-1 py-3 px-4 bg-gray-100 text-gray-700 rounded-xl font-medium hover:bg-gray-200 transition-colors">
+                🔄 重新测试
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.slide-in');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>品种输入页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        .breed-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .breed-suggestion {
+            transition: all 0.2s ease;
+        }
+        .breed-suggestion:hover {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            transform: translateY(-1px);
+        }
+        .input-focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <!-- 顶部导航栏 -->
+    <div class="bg-white bg-opacity-90 backdrop-blur-md shadow-sm px-4 py-3">
+        <div class="flex items-center justify-between">
+            <button class="p-2 hover:bg-gray-100 rounded-lg">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <h1 class="text-lg font-semibold text-gray-800">品种信息</h1>
+            <button class="text-blue-600 font-medium hover:text-blue-700">跳过</button>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="px-6 py-8 pb-32">
+        <!-- 标题区域 -->
+        <div class="text-center mb-8">
+            <div class="text-6xl mb-4">🐕‍🦺</div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">
+                告诉我们你的狗狗品种
+            </h2>
+            <p class="text-gray-600 leading-relaxed">
+                品种信息将帮助我们提供<br>
+                更准确的性格分析和个性化建议
+            </p>
+        </div>
+
+        <!-- 输入卡片 -->
+        <div class="breed-card rounded-2xl p-6 mb-6 shadow-lg">
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    狗狗品种 <span class="text-gray-400">(可选)</span>
+                </label>
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        placeholder="例如：金毛、泰迪、哈士奇..." 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-0 text-lg"
+                        onfocus="this.classList.add('input-focus')"
+                        onblur="this.classList.remove('input-focus')"
+                        oninput="filterBreeds(this.value)"
+                    >
+                    <div class="absolute right-3 top-3">
+                        <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-xs text-gray-500">
+                💡 不确定品种？没关系！我们会根据行为特征为您分析
+            </p>
+        </div>
+
+        <!-- 热门品种推荐 -->
+        <div class="mb-6">
+            <h3 class="text-lg font-semibold text-gray-800 mb-4">热门品种</h3>
+            <div class="grid grid-cols-2 gap-3" id="breedSuggestions">
+                <div class="breed-suggestion bg-white rounded-xl p-4 text-center shadow-sm cursor-pointer" onclick="selectBreed('金毛寻回犬')">
+                    <div class="text-2xl mb-2">🦮</div>
+                    <span class="text-sm font-medium">金毛寻回犬</span>
+                </div>
+                <div class="breed-suggestion bg-white rounded-xl p-4 text-center shadow-sm cursor-pointer" onclick="selectBreed('泰迪')">
+                    <div class="text-2xl mb-2">🐩</div>
+                    <span class="text-sm font-medium">泰迪</span>
+                </div>
+                <div class="breed-suggestion bg-white rounded-xl p-4 text-center shadow-sm cursor-pointer" onclick="selectBreed('哈士奇')">
+                    <div class="text-2xl mb-2">🐺</div>
+                    <span class="text-sm font-medium">哈士奇</span>
+                </div>
+                <div class="breed-suggestion bg-white rounded-xl p-4 text-center shadow-sm cursor-pointer" onclick="selectBreed('柴犬')">
+                    <div class="text-2xl mb-2">🐕</div>
+                    <span class="text-sm font-medium">柴犬</span>
+                </div>
+                <div class="breed-suggestion bg-white rounded-xl p-4 text-center shadow-sm cursor-pointer" onclick="selectBreed('边境牧羊犬')">
+                    <div class="text-2xl mb-2">🐕‍🦺</div>
+                    <span class="text-sm font-medium">边境牧羊犬</span>
+                </div>
+                <div class="breed-suggestion bg-white rounded-xl p-4 text-center shadow-sm cursor-pointer" onclick="selectBreed('混血犬')">
+                    <div class="text-2xl mb-2">🐶</div>
+                    <span class="text-sm font-medium">混血犬</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 选中品种显示 -->
+        <div id="selectedBreed" class="hidden bg-blue-50 border border-blue-200 rounded-xl p-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    <span class="text-blue-700 font-medium">已选择：<span id="breedName"></span></span>
+                </div>
+                <button onclick="clearSelection()" class="text-blue-600 hover:text-blue-700">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部按钮 -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-6">
+        <div class="space-y-3">
+            <button class="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl font-semibold text-lg hover:from-blue-600 hover:to-purple-700 transition-all shadow-lg">
+                📊 查看测试结果
+            </button>
+            <button class="w-full py-3 text-gray-600 hover:text-gray-800 font-medium">
+                暂时跳过，直接查看结果
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const breeds = ['金毛寻回犬', '泰迪', '哈士奇', '柴犬', '边境牧羊犬', '拉布拉多', '比熊', '萨摩耶', '德国牧羊犬', '混血犬'];
+        
+        function selectBreed(breed) {
+            document.querySelector('input').value = breed;
+            document.getElementById('breedName').textContent = breed;
+            document.getElementById('selectedBreed').classList.remove('hidden');
+        }
+        
+        function clearSelection() {
+            document.querySelector('input').value = '';
+            document.getElementById('selectedBreed').classList.add('hidden');
+        }
+        
+        function filterBreeds(input) {
+            if (input.length > 0) {
+                document.getElementById('breedName').textContent = input;
+                document.getElementById('selectedBreed').classList.remove('hidden');
+            } else {
+                document.getElementById('selectedBreed').classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html> 
